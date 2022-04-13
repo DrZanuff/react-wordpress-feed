@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { WordpressFeedProps } from './WordpressFeed.types'
 import { getPostsApi } from '../../api'
 import type { Post } from '../../api/types'
+import type { StyleOptionsType } from './WordpressFeed.types'
 import * as S from './WordpressFeed.styles'
 
 export const WordpressFeed: React.FC<WordpressFeedProps> = ({
@@ -11,9 +12,15 @@ export const WordpressFeed: React.FC<WordpressFeedProps> = ({
     postsContainerClassName: '',
     postItemClassName: '',
     postItemWidth: 200,
+    renderImage: false,
+    imageClassName: '',
     renderVisitLink: false,
     visitLinkText: 'See more...',
-    visitLinkClassName: ''
+    visitLinkClassName: '',
+    titleLines: 2,
+    titleMinHeight: 36,
+    bodyLines: 5,
+    bodyMinHeight: 80
   }
 }) => {
   const [posts, setPosts] = useState<Post[]>([])
@@ -27,6 +34,15 @@ export const WordpressFeed: React.FC<WordpressFeedProps> = ({
     getPosts()
   }, [])
 
+  const styleOptions: StyleOptionsType = {
+    postItemWidth: options.postItemWidth,
+    bodyLines: options.bodyLines,
+    bodyMinHeight: options.bodyMinHeight,
+    titleLines: options.titleLines,
+    titleMinHeight: options.titleMinHeight,
+    imageMaxHeight: options.imageMaxHeight
+  }
+
   return (
     <S.WordpressFeedContainer>
       {posts.length === 0 ? (
@@ -35,10 +51,18 @@ export const WordpressFeed: React.FC<WordpressFeedProps> = ({
         <S.PostsContainer
           id="postsContainer"
           className={options.postsContainerClassName}
-          postWidth={options.postItemWidth}>
+          options={styleOptions}>
           {posts.map((post) => (
             <li key={post.id} id="postItem" className={options.postItemClassName}>
               <h2 dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+              {options.renderImage && (
+                <img
+                  id="postImage"
+                  className={options.imageClassName}
+                  src={post.uagb_featured_image_src.thumbnail[0]}
+                  alt={post.title.rendered}
+                />
+              )}
               <p dangerouslySetInnerHTML={{ __html: post.uagb_excerpt }} />
               {options.renderVisitLink && (
                 <a

@@ -5,8 +5,18 @@ function App() {
     <div className="App">
       <WordpressFeed
         blogUrl="https://renemorozowich.com/"
-        totalPosts={5}
-        options={{ renderVisitLink: true, visitLinkText: 'Veja Mais' }}
+        totalPosts={8}
+        options={{
+          renderVisitLink: true,
+          visitLinkText: 'Veja Mais',
+          renderImage: true,
+          imageMaxHeight: 150,
+          titleLines: 1,
+          titleMinHeight: 18,
+          bodyLines: 5,
+          bodyMinHeight: 80,
+          postItemWidth: 300
+        }}
       />
     </div>
   )
