@@ -3,7 +3,11 @@ import { WordpressFeed } from '../../'
 function App() {
   return (
     <div className="App">
-      <WordpressFeed apiKey={'my-API-KEY'} blogUrl={'www.blog.url.com'} />
+      <WordpressFeed
+        blogUrl="https://renemorozowich.com/"
+        totalPosts={5}
+        options={{ renderVisitLink: true, visitLinkText: 'Veja Mais' }}
+      />
     </div>
   )
 }
