@@ -8,6 +8,7 @@ function App() {
         totalPosts={8}
         options={{
           renderVisitLink: true,
+          cardLink: true,
           visitLinkText: 'Veja Mais',
           renderImage: true,
           imageMaxHeight: 150,
@@ -15,7 +16,8 @@ function App() {
           titleMinHeight: 18,
           bodyLines: 5,
           bodyMinHeight: 80,
-          postItemWidth: 300
+          postItemWidth: 500,
+          compactMode: true
         }}
       />
     </div>
